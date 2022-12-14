@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="5">
+    <meta http-equiv="refresh" content=" 10">
     <title>Omarichet Sensor view</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
@@ -155,7 +155,7 @@
     </div>
     <div class="container">
       <div class="welcome">
-        <h2>CPU</h2>
+        <h2> <i class="fa-solid fa-microchip"></i> CPU</h2>
         <div class="text">
           <p><%= obj.cpufreq %> GHz</p>
           <p><%= obj.cputemp%> °C</p>
@@ -175,7 +175,7 @@
               font-family="Arial"
               dy=".3em"
             >
-            <%= obj.temperature %>°C
+            <%= typeof obj.dht.temperature !='undefined' ? obj.dht.temperature : '0' %>°C
             </text>
             <circle class="meter-1" cx="57" cy="57" r="52" />
           </svg>
@@ -188,7 +188,7 @@
         </div>
       </div>
       <div class="humidity">
-        <h2><i class="fa-solid fa-droplet-degree" style="font-size: 0.8em" ></i> Humidity</h2>
+        <h2><i class="fa-solid fa-droplet-percent" style="font-size: 0.8em" ></i> Humidity</h2>
         <div class="dashboard">
           <svg>
             <circle class="bg" cx="57" cy="57" r="52" />
@@ -201,26 +201,27 @@
               font-family="Arial"
               dy=".3em"
             >
-            <%= obj.humidity %>%
+            <%= typeof obj.dht.humidity !='undefined' ? obj.dht.humidity : '0' %> %
+            
             </text>
             <circle class="meter-2" cx="57" cy="57" r="52" />
           </svg>
         </div>
       </div>
       <div class="gyro">
-        <h2>Gyro</h2>
+        <h2><i class="fa-solid fa-angle" ></i>Gyro</h2>
         <div class="text accelText">
-          <p>x: <span>0.03</span> m/s</p>
-          <p>y: <span>0.03</span> m/s</p>
-          <p>z: <span>9.98</span> m/s</p>
+          <p>x: <span><%= obj.mpu.Gx %></span> °/s</p>
+          <p>y: <span><%= obj.mpu.Gy %></span> °/s</p>
+          <p>z: <span><%= obj.mpu.Gz %></span> °/s</p>
         </div>
       </div>
       <div class="accel">
         <h2> <i class="fa-solid fa-gauge-high" style="font-size: 0.8em"></i> Acceleration</h2>
         <div class="text accelText">
-          <p>x: <span>0.03</span> m/s</p>
-          <p>y: <span>0.03</span> m/s</p>
-          <p>z: <span>9.98</span> m/s</p>
+          <p>x: <span><%= obj.mpu.Ax %></span> G</p>
+          <p>y: <span><%= obj.mpu.Ay %></span> G</p>
+          <p>z: <span><%= obj.mpu.Az %></span> G</p>
         </div>
       </div>
     </div>
