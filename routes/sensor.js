@@ -3,9 +3,11 @@ const { exec } = require("child_process");
 const router = express.Router();
 let obj = {};
 router.get("/", async (req, res) => {
-  let eph = "python D:/systems/FullStack/Omarichet/Backend/PythonScripts/humidity.py";
-  let ept = "python D:/systems/FullStack/Omarichet/Backend/PythonScripts/temp.py"
-  let epv = "python D:/systems/FullStack/Omarichet/Backend/PythonScripts/voltage.py"
+  let eph = `python ${process.cwd()}/PythonScripts/humidity.py`;
+  let ept = `python ${process.cwd()}/PythonScripts/temp.py`
+  let epv = `python ${process.cwd()}/PythonScripts/voltage.py`
+  let epct = `python ${process.cwd()}/PythonScripts/cputemp.py`
+  let epcf = `python ${process.cwd()}/PythonScripts/cpufreq.py`
   exec(eph, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
@@ -35,6 +37,26 @@ router.get("/", async (req, res) => {
       console.log(`stderr: ${stderr.message}`);
     }
     obj.voltage = stdout;
+  });
+ exec(epct, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr.message}`);
+    }
+    obj.cputemp = stdout;
+  });
+  exec(epcf, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr.message}`);
+    }
+    obj.cpufreq = stdout;
   });
   res.render(process.cwd() + "/views/sensors.ejs", { obj });
 });

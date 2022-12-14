@@ -1,5 +1,7 @@
-import random
-def rnd():
-    print(random.randint(0, 90))
+import Adafruit_DHT
+sensor = Adafruit_DHT.DHT11
+pin = 4
 
-rnd()
+humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+print(humidity)
+
