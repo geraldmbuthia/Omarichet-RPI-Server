@@ -1,7 +1,10 @@
 const express = require("express");
 const ejs = require("ejs")
+const cors = require("cors")
 const app = express();
 const sensor = require("./routes/sensor.js")
+
+app.use(cors())
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:false}));

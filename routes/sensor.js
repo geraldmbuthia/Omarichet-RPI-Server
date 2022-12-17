@@ -69,7 +69,8 @@ router.get("/", async (req, res) => {
     console.log(JSON.parse(stdout))
     obj.dht = JSON.parse(stdout) || {};
   });
-  res.render(process.cwd() + "/views/sensors.ejs", { obj });
+  //res.render(process.cwd() + "/views/sensors.ejs", { obj });
+  res.json(obj)
 });
 
 module.exports = router;

@@ -26,16 +26,17 @@
         font-weight: thin;
         place-items: center;
       }
+
       .container {
         padding: 1em;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
         gap: 10px;
         grid-template-areas:
-          "welcome humidity battery"
-          "temp accel gyro"
-          ". . .";
+          "welcome humidity"
+          "temp battery"
+          "gyro accel ";
       }
       .container > div {
         text-align: center;
@@ -43,6 +44,8 @@
         background-color: white;
         border-radius: 10px;
         border: 1px solid grey;
+        min-height: 200px;
+        padding-bottom: 0.5em;
       }
       .container > div > h2 {
         margin: 1em;
@@ -146,6 +149,19 @@
         to {
           stroke-dashoffset: 250;
         }
+
+      @media (min-width: 700px){
+      .container {
+        padding: 1em;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 10px;
+        grid-template-areas:
+          "welcome humidity battery"
+          "temp accel gyro"
+          ". . .";
+      }
       }
     </style>
   </head>
@@ -162,7 +178,7 @@
         </div>
       </div>
       <div class="temp">
-        <h2><i class="fa-solid fa-temperature-three-quarters"></i> Temperature</h2>
+        <h2><i class="fa-solid fa-temperature-three-quarters"></i> Temp.</h2>
         <div class="dashboard">
           <svg>
             <circle class="bg" cx="57" cy="57" r="52" />
@@ -188,7 +204,7 @@
         </div>
       </div>
       <div class="humidity">
-        <h2><i class="fa-solid fa-droplet-percent" style="font-size: 0.8em" ></i> Humidity</h2>
+        <h2><i class="fa-solid fa-temperature-three-quarters"></i> Humidity</h2>
         <div class="dashboard">
           <svg>
             <circle class="bg" cx="57" cy="57" r="52" />
@@ -209,7 +225,7 @@
         </div>
       </div>
       <div class="gyro">
-        <h2><i class="fa-solid fa-angle" ></i>Gyro</h2>
+        <h2><i class="fa-solid fa-gauge-high" style="font-size: 0.8em"></i> Gyro</h2>
         <div class="text accelText">
           <p>x: <span><%= obj.mpu.Gx %></span> °/s</p>
           <p>y: <span><%= obj.mpu.Gy %></span> °/s</p>
@@ -217,7 +233,7 @@
         </div>
       </div>
       <div class="accel">
-        <h2> <i class="fa-solid fa-gauge-high" style="font-size: 0.8em"></i> Acceleration</h2>
+        <h2> <i class="fa-solid fa-gauge-high" style="font-size: 0.8em"></i> Accel. </h2>
         <div class="text accelText">
           <p>x: <span><%= obj.mpu.Ax %></span> G</p>
           <p>y: <span><%= obj.mpu.Ay %></span> G</p>
